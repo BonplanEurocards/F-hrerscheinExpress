@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Führerschein Express - Inscription Rapide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .whatsapp-bg { background-color: #25D366; }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
+
+    <div class="max-w-md w-full bg-white rounded-3xl shadow-2xl overflow-hidden">
+        <div class="bg-blue-600 p-6 text-white text-center">
+            <h1 class="text-2xl font-bold uppercase tracking-wide">Führerschein Express</h1>
+            <p class="text-sm opacity-90">Votre permis de conduire en Allemagne commence ici</p>
+        </div>
+
+        <div class="p-8">
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Pseudo TikTok / Nom</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                        <i class="fab fa-tiktok"></i>
+                    </span>
+                    <input type="text" id="userName" class="w-full pl-10 pr-3 py-3 border-2 border-gray-100 rounded-xl focus:border-blue-500 outline-none transition" placeholder="@votrepseudo">
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-gray-700 text-sm font-bold mb-2">De quoi avez-vous besoin ?</label>
+                <select id="userNeed" class="w-full p-3 border-2 border-gray-100 rounded-xl bg-white focus:border-blue-500 outline-none transition">
+                    <option value="Nouveau Permis">🚀 Passer mon permis</option>
+                    <option value="Échec Examen">❌ J'ai échoué à l'examen</option>
+                    <option value="Besoin MPU">⚖️ Passer le MPU (Test Psychologique)</option>
+                    <option value="Renseignement">ℹ️ Renseignements généraux</option>
+                </select>
+            </div>
+
+            <button onclick="sendToWhatsApp()" class="whatsapp-bg w-full text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-3 hover:scale-105 transition-transform active:scale-95">
+                <i class="fab fa-whatsapp text-2xl"></i>
+                CONTACTER SUR WHATSAPP
+            </button>
+
+            <p class="text-center text-gray-400 text-xs mt-6 uppercase">Service Rapide & Confidentiel</p>
+        </div>
+    </div>
+
+    <script>
+        function sendToWhatsApp() {
+            const name = document.getElementById('userName').value;
+            const need = document.getElementById('userNeed').value;
+            
+            // --- REMPLACE LE NUMÉRO CI-DESSOUS ---
+            // Format : Indicatif pays + numéro sans le "+" (Ex: 49 pour l'Allemagne)
+            const myPhoneNumber = "491234567890"; 
+
+            if (name.trim() === "") {
+                alert("Veuillez entrer votre nom ou pseudo TikTok");
+                return;
+            }
+
+            const message = `Bonjour Führerschein Express !\n\nJe m'appelle : ${name}\nJe viens de TikTok.\nMon besoin : ${need}\n\nPouvez-vous m'aider ?`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
